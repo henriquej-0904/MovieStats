@@ -52,7 +52,7 @@ public class MoviesDomainService {
     }
 
     public List<MovieDAO> getAllMoviesFilteredByLaunchDate(long from, long to) {
-        if (from <= 0 || to <= 0 || from > to)
+        if (from > to)
             throw new InvalidParameterException("Launch date filter is composed by a start and end dates.");
         
         return movieRepo.findByDateBetween(from, to);
@@ -70,8 +70,8 @@ public class MoviesDomainService {
         if (title == null || title.isBlank())
             throw new InvalidParameterException("The title must be a valid string of characters.");
 
-        if (date <= 0)
-            throw new InvalidParameterException("The launch date must be a valid date.");
+        // if (date <= 0)
+        //     throw new InvalidParameterException("The launch date must be a valid date.");
 
         if (rank < MIN_RANK || rank > MAX_RANK)
             throw new InvalidParameterException(

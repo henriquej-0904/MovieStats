@@ -1,7 +1,6 @@
 package pt.moviestats.data;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
@@ -10,7 +9,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import pt.moviestats.domain.MoviesDomainService;
-import pt.moviestats.service.MovieService;
 
 @Component
 public class SeedMoviesData implements CommandLineRunner {
@@ -34,7 +32,7 @@ public class SeedMoviesData implements CommandLineRunner {
             date.add(Calendar.DAY_OF_MONTH, r.nextInt(-1000, 365));
             int rank = r.nextInt(MoviesDomainService.MIN_RANK, MoviesDomainService.MAX_RANK + 1);
 
-            movies.add(new MovieDAO(String.valueOf(i), date.getTimeInMillis() / 1000, rank, n));
+            movies.add(new MovieDAO(String.valueOf(i), date.getTimeInMillis(), rank, n));
         }
 
         movieRepo.saveAll(movies);

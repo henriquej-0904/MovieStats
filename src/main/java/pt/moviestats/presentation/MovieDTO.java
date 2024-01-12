@@ -7,7 +7,7 @@ public record MovieDTO(long id, String title, long date, int rank, int revenue) 
 
     public static MovieDTO fromDAO(MovieDAO movie) {
         return new MovieDTO(movie.getId(), movie.getTitle(), movie.getDate(), movie.getRank(),
-        movie.getRevenue());
+            movie.getRevenue());
     }
 
     public record CreateMovieDTO(String title, long date, int rank, int revenue) {
