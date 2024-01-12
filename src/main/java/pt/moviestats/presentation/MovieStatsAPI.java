@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -61,15 +62,14 @@ public interface MovieStatsAPI {
     void deleteOneMovie(@PathVariable long movieId);
 
 
-    @Operation(summary = "Get one movie.")
+    @Operation(summary = "Get a list of movies filtered by a launch date.\nThe parameters 'from' and 'to' correspond to dates expressed in milliseconds since the standard base time known as \"the epoch\", namely January 1, 1970, 00:00:00 GMT.")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Found the movie",
+        @ApiResponse(responseCode = "200", description = "Found the movies that fit the specified criteria or none",
             content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = MovieDTO[].class))
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = MovieDTO.class)))
             }
         ),
-        @ApiResponse(responseCode = "400", description = "Bad request", content = {@Content}),
-        @ApiResponse(responseCode = "404", description = "Invalid movie ID", content = {@Content})
+        @ApiResponse(responseCode = "400", description = "Bad request", content = {@Content})
     })
     @GetMapping(value = "/filter/date", params = {"from", "to"})
     List<MovieDTO> getAllMoviesFilteredByLaunchDate(@RequestParam long from, @RequestParam long to);
