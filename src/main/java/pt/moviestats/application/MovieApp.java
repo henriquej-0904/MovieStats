@@ -49,4 +49,8 @@ public class MovieApp {
         return list.stream().map(MovieDTO::fromDAO).toList();
     }
 
+    public long getTotalNumberMovies() {
+        return movieService.getMoviesRepoSize();
+    }
+
 }

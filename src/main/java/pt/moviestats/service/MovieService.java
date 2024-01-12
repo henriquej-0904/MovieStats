@@ -44,4 +44,8 @@ public class MovieService {
     public List<MovieDAO> getAllMoviesFilteredByLaunchDate(long from, long to) {
         return moviesDomainService.getAllMoviesFilteredByLaunchDate(from, to);
     }
+
+    public long getMoviesRepoSize() {
+        return movieRepo.count();
+    }
 }
