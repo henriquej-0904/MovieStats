@@ -40,6 +40,7 @@ public class SeedMoviesData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        movieRepo.deleteAll();
         addMovies(10000);
     }
 
